@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Navbar, Nav, Container } from "react-bootstrap";
+import logo from "../img/spacemexLogo.png";
+import "../components/NavBar.css";
 
 export default class NavBar extends Component {
   render() {
@@ -7,11 +9,13 @@ export default class NavBar extends Component {
       <div>
         <Navbar bg="light" variant="light">
           <Container>
-            <Navbar.Brand href="#home">Navbar</Navbar.Brand>
-            <Nav className="me-auto">
-              <Nav.Link href="#home">Home</Nav.Link>
-              <Nav.Link href="#features">Features</Nav.Link>
-              <Nav.Link href="#pricing">Pricing</Nav.Link>
+            <Navbar.Brand href="#home">
+              <img src={logo} alt="Spacemex logo" className="img-fluid"></img>
+            </Navbar.Brand>
+            <Nav className="me-5 d-flex justify-content-end">
+              <Nav.Link href="#productos">Productos</Nav.Link>
+              <Nav.Link href="#faq">FAQ</Nav.Link>
+              <Nav.Link href="#nosotros">Nosotros</Nav.Link>
             </Nav>
           </Container>
         </Navbar>
