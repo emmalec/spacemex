@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { Navbar, Nav, Container } from "react-bootstrap";
-import logo from "../img/spacemexLogo.png";
-import "../components/NavBar.css";
+import { Navbar, Nav, Container } from "react-bootstrap"; //import de los componentes necesarios de bootstrap
+import logo from "../img/spacemexLogo.png"; //import de el logo para usarlo en img
+import "../components/NavBar.css"; // import de mi css
 
 export default class NavBar extends Component {
   render() {
