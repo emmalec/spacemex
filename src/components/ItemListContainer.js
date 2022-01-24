@@ -1,6 +1,7 @@
 import React from "react";
 import { Container } from "react-bootstrap";
 
+//el export default tambien podemos ponerlo antes del FunctionalComponent
 export default function ItemListContainer({ greeting }) {
   return (
     <div>
@@ -10,5 +11,3 @@ export default function ItemListContainer({ greeting }) {
     </div>
   );
 }
-
-//el export default tambien podemos ponerlo antes del FunctionalComponent
