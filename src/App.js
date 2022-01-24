@@ -6,6 +6,7 @@ function App() {
   return (
     <div className="App">
       <NavBar />
+      <i class="bi bi-cart"></i>
     </div>
   );
 }
