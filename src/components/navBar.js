@@ -10,7 +10,7 @@ function NavBar() {
       <Navbar bg="light" variant="light">
         <Container>
           <Navbar.Brand href="#home">
-            <img src={logo} alt="Spacemex logo" className="img-fluid"></img>
+            <img src={logo} alt="Spacemex logo" className="logoImg"></img>
           </Navbar.Brand>
           <Nav className="me-5 d-flex justify-content-end">
             <Nav.Link href="#productos">Productos</Nav.Link>
