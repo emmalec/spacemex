@@ -1,5 +1,5 @@
 import React from "react";
-import { Container } from "react-bootstrap";
+import { Container, Row } from "react-bootstrap";
 import ItemCount from "./ItemCount";
 
 function addItems() {}
@@ -8,9 +8,13 @@ function addItems() {}
 export default function ItemListContainer({ greeting }) {
   return (
     <div>
-      <Container className="pt-4 text-secondary">
-        <h2>{greeting}</h2>
-        <ItemCount stock={5} initial={1} onaAdd={addItems} />
+      <Container>
+        <Row className="py-4 text-secondary">
+          <h2>{greeting}</h2>
+        </Row>
+        <Row>
+          <ItemCount stock={5} initial={1} onaAdd={addItems} />
+        </Row>
       </Container>
     </div>
   );

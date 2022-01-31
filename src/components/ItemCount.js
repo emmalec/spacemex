@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Card, Button, CardGroup, Row, Col } from "react-bootstrap";
 import itemImg from "../img/nachos_guacamole.png";
 
 export default function ItemCount({ stock, initial, onAdd }) {
   //ternario para desactivar button bootstrap clase
+
+  const [count, setCount] = useState(0);
 
   return (
     <div>
@@ -13,17 +15,31 @@ export default function ItemCount({ stock, initial, onAdd }) {
             <Card>
               <Card.Img variant="top" src={itemImg} />
               <Card.Body>
-                <Card.Title>Nachos and guacamole</Card.Title>
-                <Card.Text>
+                <Card.Title>Nachos & guacamole</Card.Title>
+                <Card.Text className="text-secondary">
                   Los mejores nachos mexicanos, con el guacamole mas fresco, en
                   un packaging irresistible.
                 </Card.Text>
-                <div className="d-flex justify-content-around">
-                  <Button>-</Button>
-                  <p>69</p>
-                  <Button>+</Button>
+                <div className="d-flex justify-content-between mx-4 my-4 bg-light border">
+                  <Button
+                    onClick={function () {
+                      setCount(count - 1);
+                    }}
+                  >
+                    -
+                  </Button>
+                  <span className="m-0 fs-5 fw-normal align-baseline">
+                    {count}
+                  </span>
+                  <Button
+                    onClick={function () {
+                      setCount(count + 1);
+                    }}
+                  >
+                    +
+                  </Button>
                 </div>
-                <div className="d-flex justify-content-center mt-4">
+                <div className="d-flex justify-content-center py-2">
                   <Button variant="outline-primary">Agregar al carrito</Button>
                 </div>
               </Card.Body>
