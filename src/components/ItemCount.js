@@ -2,7 +2,9 @@ import React from "react";
 import { Card, Button, CardGroup, Row, Col } from "react-bootstrap";
 import itemImg from "../img/nachos_guacamole.png";
 
-export default function ItemCount() {
+export default function ItemCount({ stock, initial, onAdd }) {
+  //ternario para desactivar button bootstrap clase
+
   return (
     <div>
       <Row xs={2} md={4} className="g-4">
