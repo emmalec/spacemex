@@ -5,7 +5,19 @@ import itemImg from "../img/nachos_guacamole.png";
 export default function ItemCount({ stock, initial, onAdd }) {
   //ternario para desactivar button bootstrap clase
 
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(initial);
+  const [addItems, setAddItem] = useState();
+  const [disabled, setDisabled] = useState(false);
+
+  function clickAdd() {
+    count < stock && setCount(count + 1);
+  }
+
+  function clickSubst() {
+    count > initial && setCount(count - 1);
+  }
+
+  function addToCart() {}
 
   return (
     <div>
@@ -21,26 +33,16 @@ export default function ItemCount({ stock, initial, onAdd }) {
                   un packaging irresistible.
                 </Card.Text>
                 <div className="d-flex justify-content-between mx-4 my-4 bg-light border">
-                  <Button
-                    onClick={function () {
-                      setCount(count - 1);
-                    }}
-                  >
-                    -
-                  </Button>
+                  <Button onClick={clickSubst}>-</Button>
                   <span className="m-0 fs-5 fw-normal align-baseline">
                     {count}
                   </span>
-                  <Button
-                    onClick={function () {
-                      setCount(count + 1);
-                    }}
-                  >
+                  <Button disabled={stock ? false : true} onClick={clickAdd}>
                     +
                   </Button>
                 </div>
                 <div className="d-flex justify-content-center py-2">
-                  <Button variant="outline-primary">Agregar al carrito</Button>
+                  <Button variant="primary lg">Agregar al carrito</Button>
                 </div>
               </Card.Body>
             </Card>
