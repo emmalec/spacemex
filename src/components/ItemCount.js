@@ -1,23 +1,22 @@
 import React, { useState } from "react";
-import { Card, Button, CardGroup, Row, Col } from "react-bootstrap";
+import { Card, Button, Row, Col } from "react-bootstrap";
 import itemImg from "../img/nachos_guacamole.png";
 
 export default function ItemCount({ stock, initial, onAdd }) {
-  //ternario para desactivar button bootstrap clase
-
   const [count, setCount] = useState(initial);
-  const [addItems, setAddItem] = useState();
-  const [disabled, setDisabled] = useState(false);
+  const [onAddMsg, setOnAddMsg] = useState();
 
   function clickAdd() {
     count < stock && setCount(count + 1);
   }
 
-  function clickSubst() {
+  function clickSubstract() {
     count > initial && setCount(count - 1);
   }
 
-  function addToCart() {}
+  // function onAdd(count) {
+  //   return setOnAddMsg("Se agregaron al carrito ", count);
+  // }
 
   return (
     <div>
@@ -32,17 +31,27 @@ export default function ItemCount({ stock, initial, onAdd }) {
                   Los mejores nachos mexicanos, con el guacamole mas fresco, en
                   un packaging irresistible.
                 </Card.Text>
-                <div className="d-flex justify-content-between mx-4 my-4 bg-light border">
-                  <Button onClick={clickSubst}>-</Button>
+                <div className="d-flex justify-content-between align-items-center mx-4 my-4 bg-light border">
+                  <Button onClick={clickSubstract}>-</Button>
                   <span className="m-0 fs-5 fw-normal align-baseline">
                     {count}
                   </span>
-                  <Button disabled={stock ? false : true} onClick={clickAdd}>
+                  <Button
+                    disabled={count < stock ? false : true}
+                    onClick={clickAdd}
+                  >
                     +
                   </Button>
                 </div>
                 <div className="d-flex justify-content-center py-2">
-                  <Button variant="primary lg">Agregar al carrito</Button>
+                  <Button
+                    disabled={count < stock + 1 ? false : true}
+                    variant="primary"
+                    size="lg"
+                    onClick={onAdd}
+                  >
+                    Agregar al carrito
+                  </Button>
                 </div>
               </Card.Body>
             </Card>
