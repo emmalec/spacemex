@@ -14,10 +14,6 @@ export default function ItemCount({ stock, initial, onAdd }) {
     count > initial && setCount(count - 1);
   }
 
-  // function onAdd(count) {
-  //   return setOnAddMsg("Se agregaron al carrito ", count);
-  // }
-
   return (
     <div>
       <Row xs={2} md={4} className="g-4">
