@@ -4,14 +4,13 @@ import itemImg from "../img/nachos_guacamole.png";
 
 export default function ItemCount({ stock, initial, onAdd }) {
   const [count, setCount] = useState(initial);
-  const [onAddMsg, setOnAddMsg] = useState();
 
   function clickAdd() {
-    count < stock && setCount(count + 1);
+    return count < stock && setCount(count + 1);
   }
 
   function clickSubstract() {
-    count > initial && setCount(count - 1);
+    return count > initial && setCount(count - 1);
   }
 
   return (
@@ -44,7 +43,7 @@ export default function ItemCount({ stock, initial, onAdd }) {
                     disabled={count < stock + 1 ? false : true}
                     variant="primary"
                     size="lg"
-                    onClick={onAdd}
+                    onClick={() => onAdd(count)}
                   >
                     Agregar al carrito
                   </Button>
