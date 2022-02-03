@@ -24,4 +24,14 @@ const products = [
   },
 ];
 
-console.log(products);
+const promesa = new Promise(function (resolve, reject) {
+  setTimeout(function () {
+    resolve(products);
+  }, 2000);
+});
+
+function getItems() {
+  return promesa;
+}
+
+export { getItems };

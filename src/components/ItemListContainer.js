@@ -1,13 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Row } from "react-bootstrap";
-//import ItemCount from "./ItemCount";
+import { getItems } from "../api/api";
 import ItemList from "./ItemList";
 
-//el export default tambien podemos ponerlo antes del FunctionalComponent
+//import ItemCount from "./ItemCount";
+
 export default function ItemListContainer({ greeting }) {
-  function cartItems(count) {
+  /* function cartItems(count) {
     console.log("Se agregaron " + count + " productos al carrito!");
-  }
+  } */
+
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    getItems().then(function (products) {
+      console.log(products);
+      setProducts(products);
+    });
+  }, []);
 
   return (
     <div>
@@ -18,6 +28,7 @@ export default function ItemListContainer({ greeting }) {
         {/* <Row>
           <ItemCount stock={5} initial={1} onAdd={cartItems} />
         </Row> */}
+        <Row></Row>
       </Container>
     </div>
   );
