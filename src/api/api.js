@@ -11,16 +11,17 @@ const products = [
     id: 2,
     title: "Tacos",
     description:
-      "Los mejores tacos, con el mejor sabor mexicano, en un packaging irresistible.",
+      "Los mejores tacos, con el mejor sabor mexicano, en un packaging super comodo.",
     price: 1000,
-    pictureUrl: "../src/img/tacos.png",
+    pictureUrl: "../img/tacos.png",
   },
   {
     id: 3,
     title: "Spacemex T-shirt",
-    description: "Hacete de esta remera con la mejor comodidad",
+    description:
+      "Hacete de esta remera con la mejor comodidad y calidad de SpaceMex.",
     price: 2000,
-    pictureUrl: "./img/nachos_guacamole.png",
+    pictureUrl: "./img/t-shirt.png",
   },
 ];
 

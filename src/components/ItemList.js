@@ -1,5 +1,5 @@
 import Item from "./Item";
-import { CardGroup, Row, Col } from "react-bootstrap";
+import { CardGroup, Row } from "react-bootstrap";
 
 export default function ItemList({ products }) {
   // return <div>{products.map((item) => console.log(item))}</div>;

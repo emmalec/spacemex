@@ -12,9 +12,10 @@ export default function ItemListContainer({ greeting }) {
 
   const [products, setProducts] = useState([]);
 
+  //aca se resuelve la promesa y se guarda el array de productos en products
   useEffect(() => {
     getItems().then(function (products) {
-      console.log(products);
+      //console.log(products);
       setProducts(products);
     });
   }, []); //con las dependencias vacias la funcion se ejecuta una vez cargado el componente y listo
