@@ -17,7 +17,7 @@ export default function ItemListContainer({ greeting }) {
       console.log(products);
       setProducts(products);
     });
-  }, []);
+  }, []); //con las dependencias vacias la funcion se ejecuta una vez cargado el componente y listo
 
   return (
     <div>
@@ -28,7 +28,9 @@ export default function ItemListContainer({ greeting }) {
         {/* <Row>
           <ItemCount stock={5} initial={1} onAdd={cartItems} />
         </Row> */}
-        <Row></Row>
+        <Row>
+          <ItemList products={products} />
+        </Row>
       </Container>
     </div>
   );
