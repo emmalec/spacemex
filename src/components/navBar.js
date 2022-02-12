@@ -16,8 +16,13 @@ function NavBar() {
             </Navbar.Brand>
           </Link>
           <Nav className="me-5 d-flex justify-content-end">
-            <Nav.Link href="#productos">Productos</Nav.Link>
-            <Nav.Link href="#faq">FAQ</Nav.Link>
+            {/* Acá uso el as={Link} para referenciar al Link de react-router y poder usar el NavLink de Bootstrap */}
+            <Nav.Link as={Link} to="/category/comida">
+              Comida
+            </Nav.Link>
+            <Nav.Link as={Link} to="/category/merchandise">
+              Merchandise
+            </Nav.Link>
             <Nav.Link href="#nosotros">Nosotros</Nav.Link>
             <Nav.Link href="#cart">
               <CartWidget></CartWidget>
