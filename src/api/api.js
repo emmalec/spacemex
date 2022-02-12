@@ -5,7 +5,7 @@ const products = [
     description:
       "Los mejores nachos mexicanos, con el guacamole mas fresco, en un packaging irresistible.",
     price: 800,
-    pictureUrl: "./img/nachos_guacamole.jpg",
+    pictureUrl: "../img/nachos_guacamole.jpg",
   },
   {
     id: 2,
@@ -21,7 +21,7 @@ const products = [
     description:
       "Hacete de esta remera con la mejor comodidad y calidad de SpaceMex.",
     price: 2000,
-    pictureUrl: "./img/t-shirt.jpg",
+    pictureUrl: "../img/t-shirt.jpg",
   },
 ];
 

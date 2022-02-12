@@ -15,7 +15,7 @@ export default function ItemCount({ stock, initial, onAdd }) {
 
   return (
     <div>
-      <Row xs={2} md={4} className="g-4">
+      <Row>
         {Array.from({ length: 1 }).map((_, idx) => (
           <Col>
             <Card>

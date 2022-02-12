@@ -30,7 +30,7 @@ export default function ItemListContainer({ greeting }) {
           <ItemCount stock={5} initial={1} onAdd={cartItems} />
         </Row> */}
         <Row>
-          <ItemList products={products} className="my-4" />
+          <ItemList products={products} />
         </Row>
       </Container>
     </div>

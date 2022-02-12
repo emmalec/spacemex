@@ -3,15 +3,18 @@ import { Navbar, Nav, Container } from "react-bootstrap"; //import de los compon
 import logo from "../../src/spacemexLogo.png"; //import de el logo para usarlo en img
 import "../components/NavBar.css"; // import de mi css
 import CartWidget from "./CartWidget";
+import { Link } from "react-router-dom";
 
 function NavBar() {
   return (
     <div>
       <Navbar bg="light" variant="light">
         <Container>
-          <Navbar.Brand href="#home">
-            <img src={logo} alt="Spacemex logo" className="logoImg"></img>
-          </Navbar.Brand>
+          <Link to="/">
+            <Navbar.Brand href="#home">
+              <img src={logo} alt="Spacemex logo" className="logoImg"></img>
+            </Navbar.Brand>
+          </Link>
           <Nav className="me-5 d-flex justify-content-end">
             <Nav.Link href="#productos">Productos</Nav.Link>
             <Nav.Link href="#faq">FAQ</Nav.Link>
