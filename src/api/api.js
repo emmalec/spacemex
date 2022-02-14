@@ -30,7 +30,7 @@ const products = [
     id: 4,
     title: "Space-Mugs",
     description:
-      "Te presentamos las tazas de SpaceMex, termicas, irrompibles, de un material que nunca antes viste",
+      "Te presentamos las tazas de SpaceMex, termicas, irrompibles, de un material que nunca antes viste.",
     price: 3000,
     pictureUrl: "../img/mugs.jpg",
     category: "merchandise",

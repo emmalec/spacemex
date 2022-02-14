@@ -14,7 +14,6 @@ export default function Item({ item }) {
             <Card.Subtitle className="mb-2 text-muted">
               ARS {item.price}
             </Card.Subtitle>
-            {/* <Card.Text className="text-secondary">{item.description}</Card.Text> */}
           </Card.Body>
         </Card>
       </div>
