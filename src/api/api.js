@@ -26,6 +26,15 @@ const products = [
     pictureUrl: "../img/t-shirt.jpg",
     category: "merchandise",
   },
+  {
+    id: 4,
+    title: "Space-Mugs",
+    description:
+      "Te presentamos las tazas de SpaceMex, termicas, irrompibles, de un material que nunca antes viste",
+    price: 3000,
+    pictureUrl: "../img/mugs.jpg",
+    category: "merchandise",
+  },
 ];
 
 const promesa = new Promise(function (resolve, reject) {

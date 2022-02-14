@@ -1,12 +1,13 @@
 import React from "react";
 import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import "../components/Item.css";
 
 export default function Item({ item }) {
   return (
     <Link to={`/producto/${item.id}`}>
       <div>
-        <Card bg="light">
+        <Card bg="light box-shadow">
           <Card.Img variant="top" src={item.pictureUrl} />
           <Card.Body>
             <Card.Title>{item.title}</Card.Title>

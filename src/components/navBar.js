@@ -18,7 +18,7 @@ function NavBar() {
           <Nav className="me-5 d-flex justify-content-end">
             {/* Acá uso el as={Link} para referenciar al Link de react-router y poder usar el NavLink de Bootstrap */}
             <Nav.Link as={Link} to="/category/comida">
-              Comida
+              Food
             </Nav.Link>
             <Nav.Link as={Link} to="/category/merchandise">
               Merchandise
