@@ -7,7 +7,8 @@ import { useParams } from "react-router-dom";
 export default function ItemDetailContainer() {
   const [productsDetail, setProductsDetail] = useState([]);
   // itemId lo defino en App.js - los nombres deben coincidir
-  // El tipo de dato que nos devuelve el parametro es un string, hay que transformarlo
+  // El tipo de dato que nos devuelve el parametro es un string, hay que transformarlo en number de ser necesario
+  // useParams es un custom hook que recibe un {objeto} que tiene una prop: que el nombre es el mismo que definimos en App.js (itemId)
   const { itemId } = useParams();
   // Acá usamos destructuring props para sacar el itemId del objeto => parametro.itemId
 
