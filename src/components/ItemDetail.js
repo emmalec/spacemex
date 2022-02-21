@@ -1,14 +1,17 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Card, Col, Button } from "react-bootstrap";
 import ItemCount from "./ItemCount";
 import { Link } from "react-router-dom";
+import { CartContext } from "../context/CartContext";
 
 export default function ItemDetail({ item }) {
-  const [itemCount, setItemCount] = useState(undefined);
+  const [showButton, setShowButton] = useState(false);
+  const { addToCart } = useContext(CartContext);
 
   function cartItems(count) {
     console.log("Se agregaron " + count + " productos al carrito!");
-    setItemCount(count);
+    setShowButton(true);
+    addToCart(item, count);
   }
 
   return (
@@ -27,14 +30,14 @@ export default function ItemDetail({ item }) {
           </Card.Text>
         </Card.Body>
         <Card.Body>
-          {!itemCount ? (
-            <ItemCount stock={5} initial={1} onAdd={cartItems} />
-          ) : (
+          {showButton ? (
             <Link to="/cart">
               <Button variant="success" size="lg">
                 Ir al carrito
               </Button>
             </Link>
+          ) : (
+            <ItemCount stock={5} initial={1} onAdd={cartItems} />
           )}
         </Card.Body>
       </Col>

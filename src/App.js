@@ -3,12 +3,12 @@ import NavBar from "./components/NavBar";
 import ItemListContainer from "./components/ItemListContainer";
 import ItemDetailContainer from "./components/ItemDetailContainer";
 import { Routes, Route } from "react-router-dom";
-import { CartContext } from "./context/CartContext";
+import CartContextProvider from "./context/CartContext";
 
 function App() {
   return (
     <>
-      <CartContext.Provider value={[]}>
+      <CartContextProvider>
         <NavBar />
         {/* Aca se muestran los diferentes componentes de la URL */}
         <Routes>
@@ -24,7 +24,7 @@ function App() {
             element={<ItemListContainer greeting="Nombre de la categoria" />}
           />
         </Routes>
-      </CartContext.Provider>
+      </CartContextProvider>
     </>
   );
 }
