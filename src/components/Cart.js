@@ -1,15 +1,34 @@
 import React, { useContext } from "react";
 import { CartContext } from "../context/CartContext";
+import { Card, Col, Button } from "react-bootstrap";
 
 export default function Cart() {
-  const { cart } = useContext(CartContext);
+  const { cart, deleteCart, removeItem } = useContext(CartContext);
 
   return (
     <>
       {cart.map((item) => (
-        <div key={item.id}>
-          <h3>{item.title}</h3>
-        </div>
+        <Card
+          bg="light"
+          className="d-flex flex-row justify-content-between py-4 px-4 mt-4"
+        >
+          <Col md={4} className="d-flex flex-column">
+            <Card.Body>
+              <Card.Title className="fs-1">{item.title}</Card.Title>
+              <Card.Text className="fs-5 text-wrap text-secondary">
+                Cantidad: {item.quantity}
+              </Card.Text>
+              <Button onClick={deleteCart}>Vaciar carrito</Button>
+              <Button onClick={removeItem} variant="danger">
+                Borrar producto
+              </Button>
+            </Card.Body>
+            <Card.Body></Card.Body>
+          </Col>
+          <Col md={3}>
+            <Card.Img src={item.pictureUrl} />
+          </Col>
+        </Card>
       ))}
     </>
   );

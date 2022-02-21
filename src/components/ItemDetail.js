@@ -9,7 +9,7 @@ export default function ItemDetail({ item }) {
   const { addToCart } = useContext(CartContext);
 
   function cartItems(quantity) {
-    console.log("Se agregaron " + quantity + " productos al carrito!");
+    //console.log("Se agregaron " + quantity + " productos al carrito!");
     setShowButton(true);
     addToCart(item, quantity);
   }
