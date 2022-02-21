@@ -2,32 +2,32 @@ import React, { createContext, useState } from "react";
 
 export const CartContext = createContext([]);
 
-/* export default function CartContextProvider({ children }) {
+export default function CartContextProvider({ children }) {
   const [cart, setCart] = useState([]);
 
-  const addToCart = (item, count) => {
-    //setCart();
-    console.log(item);
-  };
+  function addToCart(item, quantity) {
+    //Si esta en el carrito entonces else setCart()
+    isOnCart(item.id)
+      ? console.log("Esta en el carrito!")
+      : setCart([...cart, { ...item, quantity }]);
+  }
 
-  addToCart();
+  function isOnCart(id) {
+    const response = cart.some((prod) => prod.id === id);
+    return response;
+  }
 
-  return (
-    <CartContext.Provider value={{ cart }}>{children}</CartContext.Provider>
-  );
-} */
+  function deleteCart() {
+    setCart([]);
+  }
 
-const CartContextProvider = ({ children }) => {
-  const [cart, setCart] = useState([]);
-
-  const addToCart = (item, count) => {
-    //setCart();
-    console.log("esto anda");
-  };
+  console.log(cart);
 
   return (
-    <CartContext.Provider value={{ cart }}>{children}</CartContext.Provider>
+    //Armamos un wrapper component del provider para usarlo en App
+    //Pasamos tanto el state cart, como la funcion addToCart a todos los childrens del wrapper Provider
+    <CartContext.Provider value={{ cart, addToCart }}>
+      {children}
+    </CartContext.Provider>
   );
-};
-
-export default CartContextProvider;
+}

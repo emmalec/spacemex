@@ -24,7 +24,7 @@ function NavBar() {
               Merchandise
             </Nav.Link>
             <Nav.Link href="#nosotros">Nosotros</Nav.Link>
-            <Nav.Link href="#cart">
+            <Nav.Link as={Link} to="/cart">
               <CartWidget></CartWidget>
             </Nav.Link>
           </Nav>

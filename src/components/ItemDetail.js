@@ -8,10 +8,10 @@ export default function ItemDetail({ item }) {
   const [showButton, setShowButton] = useState(false);
   const { addToCart } = useContext(CartContext);
 
-  function cartItems(count) {
-    console.log("Se agregaron " + count + " productos al carrito!");
+  function cartItems(quantity) {
+    console.log("Se agregaron " + quantity + " productos al carrito!");
     setShowButton(true);
-    addToCart(item, count);
+    addToCart(item, quantity);
   }
 
   return (
