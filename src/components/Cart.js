@@ -1,40 +1,45 @@
 import React, { useContext } from "react";
 import { CartContext } from "../context/CartContext";
-import { Card, Col, Button } from "react-bootstrap";
+import { Container } from "react-bootstrap";
+import CartDetail from "./CartDetail";
 
 export default function Cart() {
-  const { cart, deleteCart, removeItem, sumCartPrice } =
-    useContext(CartContext);
+  const { cart, sumCartPrice } = useContext(CartContext);
 
   return (
     <>
-      {cart.map((item) => (
-        <Card
-          bg="light"
-          className="d-flex flex-row justify-content-between py-4 px-4 mt-4"
-        >
-          <Col md={4} className="d-flex flex-column">
-            <Card.Body>
-              <Card.Title className="fs-1">{item.title}</Card.Title>
-              <Card.Text className="fs-5 text-wrap text-secondary">
-                <p>Cantidad: {item.quantity}</p>
-                <p>Precio: {item.price}</p>
-              </Card.Text>
-              <Button onClick={deleteCart}>Vaciar carrito</Button>
-              <Button onClick={() => removeItem(item.id)} variant="danger">
-                Borrar producto
-              </Button>
-            </Card.Body>
-            <Card.Body></Card.Body>
-          </Col>
-          <Col md={3}>
-            <Card.Img src={item.pictureUrl} />
-          </Col>
-        </Card>
-      ))}
-      {/* La function sumCart() returns sumCart = 0 
+      <Container>
+        {cart.map((item) => (
+          <CartDetail key={item.id} item={item} />
+        ))}
+        {/* <Card bg="light" className="d-flex flex-row  py-4 px-4 mt-4">
+            <Col md={2}>
+              <Card.Img src={item.pictureUrl} />
+            </Col>
+            <Col md={4} className="ms-4">
+              <Card.Body className="pt-0">
+                <Card.Title className="fs-2">{item.title}</Card.Title>
+                <Card.Text className="fs-6 text-wrap text-secondary">
+                  <p className="my-0">Cantidad: {item.quantity}</p>
+                  <p className="my-0">Precio: {item.price}</p>
+                </Card.Text>
+                <Button onClick={deleteCart}>Vaciar carrito</Button>
+                <Button onClick={() => removeItem(item.id)} variant="danger">
+                  Borrar producto
+                </Button>
+              </Card.Body>
+              <Card.Body></Card.Body>
+            </Col>
+          </Card> */}
+
+        {/* La function sumCart() returns sumCart = 0 
       estando vacio el cart, if sumCart > 0 then renderiza el h2 */}
-      {sumCartPrice() > 0 && <h2>Total: {sumCartPrice()}</h2>}
+        {sumCartPrice() > 0 && (
+          <div className="border rounded d-flex justify-content-end py-4 mt-4">
+            <h2 className="pe-2">Total: ARS {sumCartPrice()}</h2>
+          </div>
+        )}
+      </Container>
     </>
   );
 }

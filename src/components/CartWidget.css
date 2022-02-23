@@ -1,0 +1,27 @@
+.cartQty {
+  font-size: small;
+  background-color: rgba(252, 55, 55, 0.85);
+  border-radius: 373px;
+  padding-left: 6px;
+  padding-right: 6px;
+  position: relative;
+  left: -8px;
+  top: -8px;
+  color: white;
+  z-index: auto;
+
+  animation: slideIn 0.3s ease forwards;
+}
+
+.cartContainer {
+  position: absolute;
+}
+
+@keyframes slideIn {
+  from {
+    top: -50px;
+  }
+  to {
+    bottom: 10px;
+  }
+}
