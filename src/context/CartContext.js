@@ -40,7 +40,7 @@ export default function CartContextProvider({ children }) {
 
   //Function con el array method .forEach
   //Esto se lo pasamos a un wrapper en el Cart.js para sumar el precio
-  function sumCart() {
+  function sumCartPrice() {
     let cartTotal = 0;
     cart.forEach((item) => {
       cartTotal = cartTotal + item.price * item.quantity;
@@ -60,13 +60,25 @@ export default function CartContextProvider({ children }) {
   }
  */
 
-  function sumQty() {}
+  function sumCartQty() {
+    return cart.reduce(
+      (previousValue, currentValue) => previousValue + currentValue.quantity,
+      0
+    );
+  }
 
   return (
     //Armamos un wrapper component del provider para usarlo en App
     //Pasamos tanto el state cart, como la funcion addToCart a todos los childrens del wrapper Provider
     <CartContext.Provider
-      value={{ cart, addToCart, deleteCart, removeItem, sumCart }}
+      value={{
+        cart,
+        addToCart,
+        deleteCart,
+        removeItem,
+        sumCartPrice,
+        sumCartQty,
+      }}
     >
       {children}
     </CartContext.Provider>

@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
+import { CartContext } from "../context/CartContext";
 
-function CartWidget() {
-  return <FontAwesomeIcon icon={faShoppingCart} />;
+export default function CartWidget() {
+  const { sumCartQty } = useContext(CartContext);
+
+  return (
+    <>
+      <FontAwesomeIcon icon={faShoppingCart} />
+      {sumCartQty() > 0 && <span>{sumCartQty()}</span>}
+    </>
+  );
 }
-
-export default CartWidget;
