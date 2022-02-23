@@ -3,7 +3,7 @@ import { CartContext } from "../context/CartContext";
 import { Card, Col, Button } from "react-bootstrap";
 
 export default function Cart() {
-  const { cart, deleteCart, removeItem } = useContext(CartContext);
+  const { cart, deleteCart, removeItem, sumCart } = useContext(CartContext);
 
   return (
     <>
@@ -16,10 +16,11 @@ export default function Cart() {
             <Card.Body>
               <Card.Title className="fs-1">{item.title}</Card.Title>
               <Card.Text className="fs-5 text-wrap text-secondary">
-                Cantidad: {item.quantity}
+                <p>Cantidad: {item.quantity}</p>
+                <p>Precio: {item.price}</p>
               </Card.Text>
               <Button onClick={deleteCart}>Vaciar carrito</Button>
-              <Button onClick={removeItem} variant="danger">
+              <Button onClick={() => removeItem(item.id)} variant="danger">
                 Borrar producto
               </Button>
             </Card.Body>
@@ -30,6 +31,9 @@ export default function Cart() {
           </Col>
         </Card>
       ))}
+      {/* La function sumCart() returns sumCart = 0 
+      estando vacio el cart, if sumCart > 0 then renderiza el h2 */}
+      {sumCart() > 0 && <h2>Total: {sumCart()}</h2>}
     </>
   );
 }

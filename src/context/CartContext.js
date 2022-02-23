@@ -19,9 +19,7 @@ export default function CartContextProvider({ children }) {
   }
 
   function removeItem(id) {
-    //setCart(cart.filter((item) => item.id !== id));
-
-    const index = cart.findIndex((x) => x.id !== id);
+    const index = cart.findIndex((x) => x.id === id);
     cart.splice(index, 1);
     setCart([...cart]);
   }
@@ -40,10 +38,36 @@ export default function CartContextProvider({ children }) {
     setCart([]);
   }
 
+  //Function con el array method .forEach
+  //Esto se lo pasamos a un wrapper en el Cart.js para sumar el precio
+  function sumCart() {
+    let cartTotal = 0;
+    cart.forEach((item) => {
+      cartTotal = cartTotal + item.price * item.quantity;
+    });
+    //console.log(cartTotal);
+    return cartTotal;
+  }
+
+  //Function con el array method .reduce
+  /* function sumCart() {
+    //0 es el init value, el reduce recorre el array agregando el currentValue del step anterior
+    return cart.reduce(
+      (previousValue, currentValue) =>
+        previousValue + currentValue.price * currentValue.quantity,
+      0
+    );
+  }
+ */
+
+  function sumQty() {}
+
   return (
     //Armamos un wrapper component del provider para usarlo en App
     //Pasamos tanto el state cart, como la funcion addToCart a todos los childrens del wrapper Provider
-    <CartContext.Provider value={{ cart, addToCart, deleteCart, removeItem }}>
+    <CartContext.Provider
+      value={{ cart, addToCart, deleteCart, removeItem, sumCart }}
+    >
       {children}
     </CartContext.Provider>
   );
