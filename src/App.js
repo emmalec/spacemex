@@ -11,7 +11,7 @@ function App() {
     <>
       <CartContextProvider>
         <NavBar />
-        {/* Aca se muestran los diferentes componentes de la URL */}
+        {/* Aca se muestran los diferentes componentes de la URL*/}
         <Routes>
           <Route
             path="/"
