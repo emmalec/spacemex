@@ -3,6 +3,8 @@ import { getItems } from "../api/api";
 import ItemDetail from "./ItemDetail";
 import { Container, Row } from "react-bootstrap";
 import { useParams } from "react-router-dom";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../firebase";
 
 export default function ItemDetailContainer() {
   const [productsDetail, setProductsDetail] = useState([]);
@@ -12,7 +14,7 @@ export default function ItemDetailContainer() {
   const { itemId } = useParams();
   // Acá usamos destructuring props para sacar el itemId del objeto => parametro.itemId
 
-  useEffect(() => {
+  /*   useEffect(() => {
     getItems()
       .then(function (productsDetail) {
         setProductsDetail(
@@ -23,6 +25,22 @@ export default function ItemDetailContainer() {
         console.log(error);
       });
   }, [itemId]); //le pasamos en la dependencia el parametro, para cuando cambie se ejecute nuevamente la funcion
+ */
+
+  useEffect(() => {
+    //Le paso la referencia a mi item
+    const itemRef = doc(db, "items", itemId);
+    getDoc(itemRef)
+      .then((snapshot) => {
+        //funcion de objetos de firebase para ver si existe
+        if (snapshot.exists()) {
+          setProductsDetail({ id: snapshot.id, ...snapshot.data() });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [itemId]);
 
   return (
     <Container>
