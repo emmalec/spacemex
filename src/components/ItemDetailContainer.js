@@ -27,13 +27,16 @@ export default function ItemDetailContainer() {
   }, [itemId]); //le pasamos en la dependencia el parametro, para cuando cambie se ejecute nuevamente la funcion
  */
 
+  //Aca buscamos el ID en firebase
   useEffect(() => {
     //Le paso la referencia a mi item
+    //Necesita conocer la base de datos, el nombre de la collection y el item
     const itemRef = doc(db, "items", itemId);
     getDoc(itemRef)
       .then((snapshot) => {
         //funcion de objetos de firebase para ver si existe
         if (snapshot.exists()) {
+          //doc.id es el id doc.data es el contenido de ese campo con la data , el id es la raiz el data el contenido
           setProductsDetail({ id: snapshot.id, ...snapshot.data() });
         }
       })
