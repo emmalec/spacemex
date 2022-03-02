@@ -25,8 +25,6 @@ export default function Cart() {
       total: sumCartPrice(),
     };
 
-    console.log("esto se ejecuta al ejecutar la function getOrder");
-
     //creamos el ticket en firebase collection
     addDoc(collection(db, "ticket"), newOrder)
       .then((res) => {
@@ -39,7 +37,7 @@ export default function Cart() {
 
   if (orderId !== "") {
     return (
-      <h2 className="fs-1 text-center py-5 my-5">Orden de compra {orderId}</h2>
+      <h2 className="fs-1 text-center py-5 my-5">Orden de compra: {orderId}</h2>
     );
   } else {
     return (

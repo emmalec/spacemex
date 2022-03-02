@@ -15,7 +15,6 @@ function getItems() {
           ...doc.data(),
         }));
         resolve(products);
-        console.log(products);
       })
       .catch((error) => {
         console.log(error);
@@ -23,7 +22,5 @@ function getItems() {
       });
   });
 }
-
-function getItemById() {}
 
 export { getItems };
