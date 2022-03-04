@@ -3,7 +3,7 @@ import { CartContext } from "../context/CartContext";
 import { Card, Col, Button } from "react-bootstrap";
 
 export default function CartDetail({ item }) {
-  const { deleteCart, removeItem } = useContext(CartContext);
+  const { removeItem } = useContext(CartContext);
 
   return (
     <>
@@ -18,7 +18,6 @@ export default function CartDetail({ item }) {
               <p className="my-0">Cantidad: {item.quantity}</p>
               <p className="my-0">Precio: {item.price}</p>
             </Card.Text>
-            <Button onClick={deleteCart}>Vaciar carrito</Button>
             <Button onClick={() => removeItem(item.id)} variant="danger">
               Borrar producto
             </Button>

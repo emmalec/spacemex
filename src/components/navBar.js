@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 function NavBar() {
   return (
-    <div>
+    <>
       <Navbar bg="light" variant="light">
         <Container>
           <Link to="/">
@@ -23,14 +23,13 @@ function NavBar() {
             <Nav.Link as={Link} to="/category/merchandise">
               Merchandise
             </Nav.Link>
-            <Nav.Link href="#nosotros">Nosotros</Nav.Link>
             <Nav.Link as={Link} to="/cart">
               <CartWidget></CartWidget>
             </Nav.Link>
           </Nav>
         </Container>
       </Navbar>
-    </div>
+    </>
   );
 }
 

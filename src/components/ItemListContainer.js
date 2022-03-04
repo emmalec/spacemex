@@ -3,10 +3,6 @@ import { Container, Row } from "react-bootstrap";
 import { getItems } from "../api/api";
 import ItemList from "./ItemList";
 import { useParams } from "react-router-dom";
-import { getDocs, collection } from "firebase/firestore";
-import { db } from "../firebase";
-
-//import ItemCount from "./ItemCount";
 
 export default function ItemListContainer({ greeting }) {
   const { categoryName } = useParams();
@@ -28,26 +24,8 @@ export default function ItemListContainer({ greeting }) {
     });
   }, [categoryName]); //con las dependencias vacias la funcion se ejecuta una vez cargado el componente y listo
 
-  /* useEffect(() => {
-    //funcion de firestore para obtener los documentos
-    getDocs(collection(db, "items"))
-      //snapshot es una copia de esa db para poder obtenerla completa
-      .then((snapshot) => {
-        //Estoy retornando un objeto cuando mapeo que tiene un id, el spread me permite tomar esos datos y hacer un clon de esas propiedades, es doc.data porque el objeto data de firestore es donde estan todos los datos de mi db
-        
-        const products = snapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-        console.log(products);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []); */
-
   return (
-    <div>
+    <>
       <Container>
         <Row className="py-4 text-secondary">
           <h2>{(greeting, categoryName)}</h2>
@@ -56,6 +34,6 @@ export default function ItemListContainer({ greeting }) {
           <ItemList products={products} />
         </Row>
       </Container>
-    </div>
+    </>
   );
 }
