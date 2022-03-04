@@ -7,8 +7,8 @@ export default function CartDetail({ item }) {
 
   return (
     <>
-      <Card bg="light" className="d-flex flex-row  py-4 px-4 mt-4">
-        <Col md={2}>
+      <Card bg="light" className="d-flex flex-row py-4 ps-4 pe-3 mt-4">
+        <Col md={3}>
           <Card.Img src={item.pictureUrl} />
         </Col>
         <Col md={4} className="ms-4">
@@ -18,11 +18,12 @@ export default function CartDetail({ item }) {
               <p className="my-0">Cantidad: {item.quantity}</p>
               <p className="my-0">Precio: {item.price}</p>
             </Card.Text>
-            <Button onClick={() => removeItem(item.id)} variant="danger">
-              Borrar producto
-            </Button>
           </Card.Body>
-          <Card.Body></Card.Body>
+        </Col>
+        <Col md={1} className="ms-auto ps-2">
+          <Button onClick={() => removeItem(item.id)} variant="danger">
+            X
+          </Button>
         </Col>
       </Card>
     </>
