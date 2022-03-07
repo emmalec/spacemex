@@ -11,20 +11,61 @@ export default function Cart() {
   const { cart, sumCartPrice, sumCartQty, deleteCart } =
     useContext(CartContext);
 
-  //Creamos los useState
-  const [name, setName] = useState("");
-  const [surname, setSurname] = useState("");
-  const [phone, setPhone] = useState(11342423);
-  const [email, setEmail] = useState("");
+  //Creamos el useState con el objeto buyer para setearlo mas adelante en el handleChange
+  const [buyer, setBuyer] = useState({
+    name: "",
+    surname: "",
+    phone: "",
+    email: "",
+    emailValid: "",
+  });
+
+  //useState de la order
   const [orderId, setOrderId] = useState("");
+  const [formError, setFormError] = useState(false);
+
+  //La funcion handleChange setea cada prop del {objeto} buyer
+  const handleChange = (event) => {
+    console.log(
+      "handleChange -> " + event.target.name + " : " + event.target.value
+    );
+
+    setBuyer((buyer) => ({
+      ...buyer,
+      [event.target.name]: event.target.value,
+    }));
+  };
+
+  //En esta funcion validamos el formulario
+  const validateForm = () => {
+    let errors = {};
+    //name field
+    if (!buyer.name) {
+      errors.name = "Por favor ingrese su nombre";
+      console.log("error");
+    }
+    /* //email field
+    if (!values.email) {
+      errors.email = "Email address is required";
+    } else if (!/\S+@\S+\.\S+/.test(values.email)) {
+      errors.email = "Email address is invalid";
+    }
+    setFormErrors(errors);
+    if (Object.keys(errors).length === 0) {
+      return true;
+    } else {
+      return false;
+    } */
+  };
 
   const handleSubmitOrd = (e) => {
     //prevent default para el refresh
     e.preventDefault();
+    validateForm();
     //creamos la order
     const newOrder = {
       date: new Date(),
-      buyer: { name, surname, phone, email },
+      buyer: buyer,
       items: cart,
       total: sumCartPrice(),
     };
@@ -98,30 +139,33 @@ export default function Cart() {
                 <Form.Group className="mb-3" controlId="formBasicName">
                   <Form.Label>Nombre</Form.Label>
                   <Form.Control
-                    onChange={(e) => setName(e.target.value)}
-                    value={name}
-                    type="text"
                     placeholder="Ingrese su nombre"
+                    type="text"
+                    name="name"
+                    value={buyer.name}
+                    onChange={handleChange}
                   />
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formBasicSurname">
                   <Form.Label>Apellido</Form.Label>
                   <Form.Control
-                    onChange={(e) => setSurname(e.target.value)}
-                    value={surname}
+                    placeholder="Ingrese su apellido"
                     type="text"
-                    placeholder="Ingrese su nombre"
+                    name="surname"
+                    value={buyer.surname}
+                    onChange={handleChange}
                   />
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                   <Form.Label>Email address</Form.Label>
                   <Form.Control
-                    onChange={(e) => setEmail(e.target.value)}
-                    value={email}
+                    placeholder="Ingrese su e-mail"
                     type="email"
-                    placeholder="Enter email"
+                    name="email"
+                    value={buyer.email}
+                    onChange={handleChange}
                   />
                   <Form.Text className="text-muted">
                     We'll never share your email with anyone else.
