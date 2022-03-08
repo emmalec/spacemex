@@ -30,29 +30,32 @@ export default function Cart() {
       ...buyer,
       [event.target.name]: event.target.value,
     }));
+    //probar bien aca el validate
+    validateForm(buyer);
   };
 
-  //En esta funcion validamos el formulario
+  //validate email function called on handleSubmitOrd
   const validateForm = () => {
     let errors = {};
-    //name field
+    //name field empty
     if (!buyer.name) {
       errors.name = "Por favor ingrese su nombre";
     }
-    //surname field
+    //surname field empty
     if (!buyer.surname) {
       errors.surname = "Por favor ingrese su apellido";
     }
-    //email field REGex validation / mail match
+    //email field empty/ RegExp validation / mail match
     if (!buyer.email) {
-      errors.email = "Email address is required";
+      errors.email = "La direccion de e-mail es obligatoria";
     } else if (!/\S+@\S+\.\S+/.test(buyer.email)) {
-      errors.email = "Email address is invalid";
+      errors.email = "La direccion de e-mail es invalida";
     } else if (buyer.email !== buyer.emailValid) {
-      errors.email = "Email doesn/'t match";
+      errors.email = "El e-mail no coincide";
     }
     setFormErrors(errors);
-    if (errors.length === 0) {
+    //If object keys of error is 0 then true
+    if (Object.keys(errors).length === 0) {
       return true;
     } else {
       return false;
@@ -120,67 +123,71 @@ export default function Cart() {
             <Col md={4} className="mt-4">
               <h2>Completa el formulario para finalizar la compra</h2>
               <Form onSubmit={handleSubmitOrd}>
-                <Form.Group className="mb-3" controlId="formBasicName">
+                <Form.Group className="mb-4" controlId="formBasicName">
                   <Form.Control
                     placeholder="Ingrese su nombre"
                     type="text"
                     name="name"
                     value={buyer.name}
                     onChange={handleChange}
+                    className={formErrors.name && "is-invalid"}
                   />
                   {formErrors.name && (
-                    <Form.Text className="text-danger">
+                    <Form.Text className="text-danger position-absolute">
                       {formErrors.name}
                     </Form.Text>
                   )}
                 </Form.Group>
 
-                <Form.Group className="mb-3" controlId="formBasicSurname">
+                <Form.Group className="mb-4" controlId="formBasicSurname">
                   <Form.Control
                     placeholder="Ingrese su apellido"
                     type="text"
                     name="surname"
                     value={buyer.surname}
                     onChange={handleChange}
+                    className={formErrors.name && "is-invalid"}
                   />
                   {formErrors.surname && (
-                    <Form.Text className="text-danger">
+                    <Form.Text className="text-danger position-absolute">
                       {formErrors.surname}
                     </Form.Text>
                   )}
                 </Form.Group>
 
-                <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Group className="mb-4" controlId="formBasicEmail">
                   <Form.Control
                     placeholder="Ingrese su e-mail"
                     type="email"
                     name="email"
                     value={buyer.email}
                     onChange={handleChange}
+                    className={formErrors.name && "is-invalid"}
                   />
                   {formErrors.email && (
-                    <Form.Text className="text-danger">
+                    <Form.Text className="text-danger position-absolute">
                       {formErrors.email}
                     </Form.Text>
                   )}
                 </Form.Group>
 
-                <Form.Group className="mb-3" controlId="formBasicEmailValid">
+                <Form.Group className="mb-4" controlId="formBasicEmailValid">
                   <Form.Control
                     placeholder="Repita su e-mail"
                     type="email"
                     name="emailValid"
                     value={buyer.emailValid}
                     onChange={handleChange}
+                    className={formErrors.name && "is-invalid"}
                   />
                   {formErrors.email && (
-                    <Form.Text className="text-danger">
+                    <Form.Text className="text-danger position-absolute">
                       {formErrors.email}
                     </Form.Text>
                   )}
                 </Form.Group>
 
-                <Button variant="success" type="submit" className="btn-lg">
+                <Button variant="success" type="submit" className="btn-lg mt-3">
                   Finalizar compra
                 </Button>
               </Form>
