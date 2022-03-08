@@ -22,14 +22,10 @@ export default function Cart() {
 
   //useState de la order
   const [orderId, setOrderId] = useState("");
-  const [formError, setFormError] = useState(false);
+  const [formErrors, setFormErrors] = useState({});
 
   //La funcion handleChange setea cada prop del {objeto} buyer
   const handleChange = (event) => {
-    console.log(
-      "handleChange -> " + event.target.name + " : " + event.target.value
-    );
-
     setBuyer((buyer) => ({
       ...buyer,
       [event.target.name]: event.target.value,
@@ -42,64 +38,53 @@ export default function Cart() {
     //name field
     if (!buyer.name) {
       errors.name = "Por favor ingrese su nombre";
-      console.log("error");
     }
-    /* //email field
-    if (!values.email) {
+    //surname field
+    if (!buyer.surname) {
+      errors.surname = "Por favor ingrese su apellido";
+    }
+    //email field REGex validation / mail match
+    if (!buyer.email) {
       errors.email = "Email address is required";
-    } else if (!/\S+@\S+\.\S+/.test(values.email)) {
+    } else if (!/\S+@\S+\.\S+/.test(buyer.email)) {
       errors.email = "Email address is invalid";
+    } else if (buyer.email !== buyer.emailValid) {
+      errors.email = "Email doesn/'t match";
     }
     setFormErrors(errors);
-    if (Object.keys(errors).length === 0) {
+    if (errors.length === 0) {
       return true;
     } else {
       return false;
-    } */
+    }
   };
 
   const handleSubmitOrd = (e) => {
     //prevent default para el refresh
     e.preventDefault();
-    validateForm();
-    //creamos la order
-    const newOrder = {
-      date: new Date(),
-      buyer: buyer,
-      items: cart,
-      total: sumCartPrice(),
-    };
+    if (validateForm(buyer)) {
+      //creamos la order
+      const newOrder = {
+        date: new Date(),
+        buyer: buyer,
+        items: cart,
+        total: sumCartPrice(),
+      };
 
-    //creamos el ticket en firebase collection
-    addDoc(collection(db, "ticket"), newOrder)
-      .then((res) => {
-        //aca saco el id del response de firebase
-        setOrderId(res.id);
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-      .finally(deleteCart());
+      //creamos el ticket en firebase collection
+      addDoc(collection(db, "ticket"), newOrder)
+        .then((res) => {
+          //aca saco el id del response de firebase
+          setOrderId(res.id);
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+        .finally(deleteCart());
+    } else {
+      console.log("Error en el form");
+    }
   };
-
-  /* const getOrder = () => {
-    //creamos la order
-    const newOrder = {
-      date: new Date(),
-      buyer: { name, surname, phone, email },
-      items: cart,
-      total: sumCartPrice(),
-    };
-
-    //creamos el ticket en firebase collection
-    addDoc(collection(db, "ticket"), newOrder)
-      .then((res) => {
-        setOrderId(res.id);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }; */
 
   if (orderId !== "") {
     return (
@@ -127,7 +112,6 @@ export default function Cart() {
                       Hay {sumCartQty()} productos en tu carrito.
                     </p>
                     <h2>Total: ARS {sumCartPrice()}</h2>
-                    {/* <Button onClick={() => getOrder()}>Finalizar compra</Button> */}
                     <Button onClick={deleteCart}>Vaciar carrito</Button>
                   </div>
                 </div>
@@ -137,7 +121,6 @@ export default function Cart() {
               <h2>Completa el formulario para finalizar la compra</h2>
               <Form onSubmit={handleSubmitOrd}>
                 <Form.Group className="mb-3" controlId="formBasicName">
-                  <Form.Label>Nombre</Form.Label>
                   <Form.Control
                     placeholder="Ingrese su nombre"
                     type="text"
@@ -145,10 +128,14 @@ export default function Cart() {
                     value={buyer.name}
                     onChange={handleChange}
                   />
+                  {formErrors.name && (
+                    <Form.Text className="text-danger">
+                      {formErrors.name}
+                    </Form.Text>
+                  )}
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formBasicSurname">
-                  <Form.Label>Apellido</Form.Label>
                   <Form.Control
                     placeholder="Ingrese su apellido"
                     type="text"
@@ -156,10 +143,14 @@ export default function Cart() {
                     value={buyer.surname}
                     onChange={handleChange}
                   />
+                  {formErrors.surname && (
+                    <Form.Text className="text-danger">
+                      {formErrors.surname}
+                    </Form.Text>
+                  )}
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formBasicEmail">
-                  <Form.Label>Email address</Form.Label>
                   <Form.Control
                     placeholder="Ingrese su e-mail"
                     type="email"
@@ -167,9 +158,26 @@ export default function Cart() {
                     value={buyer.email}
                     onChange={handleChange}
                   />
-                  <Form.Text className="text-muted">
-                    We'll never share your email with anyone else.
-                  </Form.Text>
+                  {formErrors.email && (
+                    <Form.Text className="text-danger">
+                      {formErrors.email}
+                    </Form.Text>
+                  )}
+                </Form.Group>
+
+                <Form.Group className="mb-3" controlId="formBasicEmailValid">
+                  <Form.Control
+                    placeholder="Repita su e-mail"
+                    type="email"
+                    name="emailValid"
+                    value={buyer.emailValid}
+                    onChange={handleChange}
+                  />
+                  {formErrors.email && (
+                    <Form.Text className="text-danger">
+                      {formErrors.email}
+                    </Form.Text>
+                  )}
                 </Form.Group>
 
                 <Button variant="success" type="submit" className="btn-lg">
