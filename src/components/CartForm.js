@@ -4,6 +4,7 @@ import { Button, Form } from "react-bootstrap";
 export default function CartForm({
   buyer,
   formErrors,
+  buttonDisabled,
   handleChange,
   handleSubmitOrd,
   validateForm,
@@ -54,6 +55,27 @@ export default function CartForm({
           )}
         </Form.Group>
 
+        <Form.Group className="mb-4" controlId="formBasicPhone">
+          <Form.Control
+            placeholder="Ingrese su telefono"
+            type="tel"
+            name="phone"
+            value={buyer.phone}
+            onChange={handleChange}
+            onInput={buyer.phone ? validateForm : undefined}
+            className={
+              formErrors.phone
+                ? "is-invalid"
+                : buyer.phone.length > 0 && "is-valid"
+            }
+          />
+          {formErrors.phone && (
+            <Form.Text className="text-danger position-absolute">
+              {formErrors.phone}
+            </Form.Text>
+          )}
+        </Form.Group>
+
         <Form.Group className="mb-4" controlId="formBasicEmail">
           <Form.Control
             placeholder="Ingrese su e-mail"
@@ -78,7 +100,9 @@ export default function CartForm({
             name="emailValid"
             value={buyer.emailValid}
             onChange={handleChange}
-            onInput={buyer.emailValid ? validateForm : undefined}
+            onInput={
+              buyer.email === buyer.emailValid ? validateForm : undefined
+            }
             className={
               buyer.email === buyer.emailValid ? "is-valid" : "is-invalid"
             }
@@ -93,8 +117,8 @@ export default function CartForm({
         <Button
           variant="success"
           type="submit"
-          className="btn-lg mt-3"
-          disabled={!formErrors}
+          className="mt-2 btn-lg"
+          disabled={buttonDisabled}
         >
           Finalizar compra
         </Button>

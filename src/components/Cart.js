@@ -28,6 +28,9 @@ export default function Cart() {
   //useState de error de formulario, setea un objeto
   const [formErrors, setFormErrors] = useState({});
 
+  //button disabled CartForm
+  const [buttonDisabled, setButtonDisabled] = useState(false);
+
   //La funcion handleChange setea cada prop del {objeto} buyer
   const handleChange = (event) => {
     setBuyer((buyer) => ({
@@ -49,6 +52,10 @@ export default function Cart() {
     if (!buyer.surname) {
       errors.surname = "Por favor ingrese su apellido";
     }
+    //phonefield empty
+    if (!buyer.phone) {
+      errors.phone = "Por favor ingrese su telefono";
+    }
     //email field empty/ RegExp validation / mail match
     if (!buyer.email) {
       errors.email = "La direccion de e-mail es obligatoria";
@@ -60,6 +67,7 @@ export default function Cart() {
     setFormErrors(errors);
     //If object keys of error is 0 then true
     if (Object.keys(errors).length === 0) {
+      setButtonDisabled(false);
       return true;
     } else {
       return false;
@@ -129,8 +137,11 @@ export default function Cart() {
                     <p className="text-muted my-0">
                       Hay {sumCartQty()} productos en tu carrito.
                     </p>
-                    <h2>Total: ARS {sumCartPrice()}</h2>
-                    <Button onClick={deleteCart} variant="warning">
+                    <h2>
+                      <span className="text-muted">Total: </span>
+                      {sumCartPrice()} ARS
+                    </h2>
+                    <Button onClick={deleteCart} variant="danger">
                       Vaciar carrito
                     </Button>
                     <Link to="/">
@@ -149,6 +160,7 @@ export default function Cart() {
                 <CartForm
                   formErrors={formErrors}
                   buyer={buyer}
+                  buttonDisabled={buttonDisabled}
                   handleChange={handleChange}
                   handleSubmitOrd={handleSubmitOrd}
                   validateForm={validateForm}
