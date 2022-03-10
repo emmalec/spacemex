@@ -61,7 +61,8 @@ export default function CartForm({
             name="email"
             value={buyer.email}
             onChange={handleChange}
-            className={formErrors.name && "is-invalid"}
+            onInput={buyer.email ? validateForm : undefined}
+            className={formErrors.email && "is-invalid"}
           />
           {formErrors.email && (
             <Form.Text className="text-danger position-absolute">
@@ -77,7 +78,10 @@ export default function CartForm({
             name="emailValid"
             value={buyer.emailValid}
             onChange={handleChange}
-            className={formErrors.name && "is-invalid"}
+            onInput={buyer.emailValid ? validateForm : undefined}
+            className={
+              buyer.email === buyer.emailValid ? "is-valid" : "is-invalid"
+            }
           />
           {buyer.email !== buyer.emailValid && (
             <Form.Text className="text-danger position-absolute">
