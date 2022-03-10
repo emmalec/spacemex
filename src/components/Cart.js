@@ -115,12 +115,15 @@ export default function Cart() {
                       Hay {sumCartQty()} productos en tu carrito.
                     </p>
                     <h2>Total: ARS {sumCartPrice()}</h2>
-                    <Button onClick={deleteCart}>Vaciar carrito</Button>
+                    <Button onClick={deleteCart} variant="warning">
+                      Vaciar carrito
+                    </Button>
+                    <Button variant="primary">Seguir comprando</Button>
                   </div>
                 </div>
               )}
             </Col>
-            <Col md={4} className="mt-4">
+            <Col md={4} className="mt-4 bg-light">
               <h2>Completa el formulario para finalizar la compra</h2>
               <Form onSubmit={handleSubmitOrd}>
                 <Form.Group className="mb-4" controlId="formBasicName">
@@ -196,7 +199,12 @@ export default function Cart() {
                   )}
                 </Form.Group>
 
-                <Button variant="success" type="submit" className="btn-lg mt-3">
+                <Button
+                  variant="success"
+                  type="submit"
+                  className="btn-lg mt-3"
+                  disabled={validateForm}
+                >
                   Finalizar compra
                 </Button>
               </Form>

@@ -31,11 +31,18 @@ export default function ItemDetail({ item }) {
         </Card.Body>
         <Card.Body>
           {showButton ? (
-            <Link to="/cart">
-              <Button variant="success" size="lg">
-                Ir al carrito
-              </Button>
-            </Link>
+            <>
+              <Link to="/cart">
+                <Button variant="success" size="lg">
+                  Ir al carrito
+                </Button>
+              </Link>
+              <Link to="/">
+                <Button variant="primary" size="lg" className="ms-2">
+                  Seguir comprando
+                </Button>
+              </Link>
+            </>
           ) : (
             <ItemCount stock={5} initial={1} onAdd={cartItems} />
           )}
