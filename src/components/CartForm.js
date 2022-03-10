@@ -1,11 +1,12 @@
 import React from "react";
-import { Button, Col, Container, Form, Row } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 
 export default function CartForm({
   buyer,
   formErrors,
   handleChange,
   handleSubmitOrd,
+  validateForm,
 }) {
   return (
     <>
@@ -17,6 +18,7 @@ export default function CartForm({
             name="name"
             value={buyer.name}
             onChange={handleChange}
+            onInput={buyer.name ? validateForm : undefined}
             //Set class if formErrors.name exists / set invalid if true / if name length is > 1 set valid
             className={
               formErrors.name
@@ -38,6 +40,7 @@ export default function CartForm({
             name="surname"
             value={buyer.surname}
             onChange={handleChange}
+            onInput={buyer.surname ? validateForm : undefined}
             className={
               formErrors.surname
                 ? "is-invalid"

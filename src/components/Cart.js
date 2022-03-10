@@ -9,6 +9,7 @@ import { db } from "../firebase";
 import CartForm from "./CartForm";
 
 export default function Cart() {
+  //Traemos el cart y las functions del context
   const { cart, sumCartPrice, sumCartQty, deleteCart } =
     useContext(CartContext);
 
@@ -20,8 +21,10 @@ export default function Cart() {
     email: "",
     emailValid: "",
   });
+
   //useState de la order
   const [orderId, setOrderId] = useState("");
+
   //useState de error de formulario, setea un objeto
   const [formErrors, setFormErrors] = useState({});
 
@@ -32,10 +35,10 @@ export default function Cart() {
       [event.target.name]: event.target.value,
     }));
     //probar bien aca el validate
-    validateForm(buyer);
+    //validateForm(buyer);
   };
 
-  //validate email function called on handleSubmitOrd
+  //validate email function called on handleSubmitOrd/handleChange
   const validateForm = () => {
     let errors = {};
     //name field empty
@@ -90,14 +93,25 @@ export default function Cart() {
     }
   };
 
+  //if orderId is empty ther render Orden de compra
   if (orderId !== "") {
     return (
       <h2 className="fs-1 text-center py-5 my-5">Orden de compra: {orderId}</h2>
     );
-  } else {
+  }
+  //if cart lenght is equal to 0 then render Carrito vacio
+  else if (cart.length === 0) {
+    return (
+      <h2 className="fs-1 text-center py-5 my-5">
+        El carrito está vacio! Ir a <Link to="/">Home</Link>
+      </h2>
+    );
+  }
+  // else render the cart
+  else {
     return (
       <>
-        <Container>
+        <Container fluid>
           <Row>
             <Col md={8}>
               {cart.length > 0 ? (
@@ -119,20 +133,27 @@ export default function Cart() {
                     <Button onClick={deleteCart} variant="warning">
                       Vaciar carrito
                     </Button>
-                    <Button variant="primary">Seguir comprando</Button>
+                    <Link to="/">
+                      <Button variant="primary" className="ms-2">
+                        Seguir comprando
+                      </Button>
+                    </Link>
                   </div>
                 </div>
               )}
             </Col>
 
-            <Col md={4} className="py-4 mt-4 border rounded bg-light">
-              <h2>Completa el formulario para finalizar la compra</h2>
-              <CartForm
-                formErrors={formErrors}
-                buyer={buyer}
-                handleChange={handleChange}
-                handleSubmitOrd={handleSubmitOrd}
-              />
+            <Col md={4}>
+              <Container className="py-4 mt-4 border rounded bg-light">
+                <h2>Completa el formulario para finalizar la compra</h2>
+                <CartForm
+                  formErrors={formErrors}
+                  buyer={buyer}
+                  handleChange={handleChange}
+                  handleSubmitOrd={handleSubmitOrd}
+                  validateForm={validateForm}
+                />
+              </Container>
             </Col>
           </Row>
         </Container>
