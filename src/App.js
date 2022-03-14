@@ -16,13 +16,13 @@ function App() {
           <Route
             path="/"
             element={
-              <ItemListContainer greeting="Hola, bienvenido a la tienda." />
+              <ItemListContainer greeting="Hola, bienvenido a la tienda de SpaceMex." />
             }
           />
           <Route path="/producto/:itemId" element={<ItemDetailContainer />} />
           <Route
             path="/category/:categoryName"
-            element={<ItemListContainer greeting="Nombre de la categoria" />}
+            element={<ItemListContainer />}
           />
           <Route path="/cart" element={<Cart />} />
         </Routes>

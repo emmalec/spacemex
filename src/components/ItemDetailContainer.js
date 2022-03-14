@@ -14,19 +14,6 @@ export default function ItemDetailContainer() {
   const { itemId } = useParams();
   // Acá usamos destructuring props para sacar el itemId del objeto => parametro.itemId
 
-  /*   useEffect(() => {
-    getItems()
-      .then(function (productsDetail) {
-        setProductsDetail(
-          productsDetail.find((i) => i.id === parseInt(itemId)) //aca lo parseamos a int
-        );
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, [itemId]); //le pasamos en la dependencia el parametro, para cuando cambie se ejecute nuevamente la funcion
- */
-
   //Aca buscamos el ID en firebase
   useEffect(() => {
     //Le paso la referencia a mi item

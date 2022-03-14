@@ -44,17 +44,25 @@ export default function Cart() {
   //validate email function called on handleSubmitOrd/handleChange
   const validateForm = () => {
     let errors = {};
-    //name field empty
+    //name field empty / text RegEx
     if (!buyer.name) {
       errors.name = "Por favor ingrese su nombre";
+    } else if (!/^[a-z ,.'-]+$/i.test(buyer.name)) {
+      errors.name = "Ingrese un nombre valido";
     }
-    //surname field empty
+    //surname field empty / text RegEx
     if (!buyer.surname) {
       errors.surname = "Por favor ingrese su apellido";
+    } else if (!/^[a-z ,.'-]+$/i.test(buyer.surname)) {
+      errors.surname = "Ingrese un apellido valido";
     }
     //phonefield empty
     if (!buyer.phone) {
       errors.phone = "Por favor ingrese su telefono";
+    } else if (
+      !/\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/.test(buyer.phone)
+    ) {
+      errors.phone = "Ingrese un telefono valido";
     }
     //email field empty/ RegExp validation / mail match
     if (!buyer.email) {
@@ -135,7 +143,7 @@ export default function Cart() {
                 <div className="border rounded d-flex justify-content-end py-4 mt-4">
                   <div className="pe-5">
                     <p className="text-muted my-0">
-                      Hay {sumCartQty()} productos en tu carrito.
+                      Hay {sumCartQty()} producto/s en tu carrito.
                     </p>
                     <h2>
                       <span className="text-muted">Total: </span>

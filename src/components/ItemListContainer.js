@@ -28,7 +28,11 @@ export default function ItemListContainer({ greeting }) {
     <>
       <Container>
         <Row className="py-4 text-secondary">
-          <h2>{(greeting, categoryName)}</h2>
+          {!categoryName ? (
+            <h2>{greeting}</h2>
+          ) : (
+            <h2 className="text-capitalize">Categoria: {categoryName}</h2>
+          )}
         </Row>
         <Row>
           <ItemList products={products} />
