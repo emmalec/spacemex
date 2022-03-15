@@ -164,7 +164,9 @@ export default function Cart() {
 
             <Col md={4}>
               <Container className="py-4 mt-4 border rounded bg-light">
-                <h2>Completa el formulario para finalizar la compra</h2>
+                <h2 className="mb-4">
+                  Completa el formulario para finalizar la compra
+                </h2>
                 <CartForm
                   formErrors={formErrors}
                   buyer={buyer}

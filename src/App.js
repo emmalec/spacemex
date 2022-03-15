@@ -16,7 +16,7 @@ function App() {
           <Route
             path="/"
             element={
-              <ItemListContainer greeting="Hola, bienvenido a la tienda de SpaceMex." />
+              <ItemListContainer greeting="Bienvenido a la tienda de SpaceMex." />
             }
           />
           <Route path="/producto/:itemId" element={<ItemDetailContainer />} />
