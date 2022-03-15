@@ -84,7 +84,11 @@ export default function CartForm({
             value={buyer.email}
             onChange={handleChange}
             onBlur={validateForm}
-            className={formErrors.email && "is-invalid"}
+            className={
+              buyer.email === buyer.emailValid
+                ? buyer.emailValid.length > 0 && "is-valid"
+                : "is-invalid"
+            }
           />
           {formErrors.email && (
             <Form.Text className="text-danger position-absolute">
@@ -102,7 +106,9 @@ export default function CartForm({
             onChange={handleChange}
             onBlur={validateForm}
             className={
-              buyer.email === buyer.emailValid ? "is-valid" : "is-invalid"
+              buyer.email === buyer.emailValid
+                ? buyer.emailValid.length > 0 && "is-valid"
+                : "is-invalid"
             }
           />
           {buyer.email !== buyer.emailValid && (

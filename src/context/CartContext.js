@@ -8,8 +8,7 @@ export default function CartContextProvider({ children }) {
   function addToCart(item, quantity) {
     //Si esta en el carrito entonces else setCart()
     isOnCart(item.id)
-      ? //sumar cantidad aca
-        sumItems(item, quantity) //console.log("Esta en el carrito!")
+      ? sumItems(item, quantity)
       : setCart([...cart, { ...item, quantity }]);
   }
 
@@ -31,7 +30,6 @@ export default function CartContextProvider({ children }) {
         prod.quantity += quantity;
       }
     });
-    //console.log({ quantity });
   }
 
   function deleteCart() {
@@ -45,20 +43,8 @@ export default function CartContextProvider({ children }) {
     cart.forEach((item) => {
       cartTotal = cartTotal + item.price * item.quantity;
     });
-    //console.log(cartTotal);
     return cartTotal;
   }
-
-  //Function con el array method .reduce
-  /* function sumCart() {
-    //0 es el init value, el reduce recorre el array agregando el currentValue del step anterior
-    return cart.reduce(
-      (previousValue, currentValue) =>
-        previousValue + currentValue.price * currentValue.quantity,
-      0
-    );
-  }
- */
 
   function sumCartQty() {
     return cart.reduce(
