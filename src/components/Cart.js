@@ -28,7 +28,7 @@ export default function Cart() {
   //button disabled CartForm
   const [buttonDisabled, setButtonDisabled] = useState(true);
   //loading
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   //La funcion handleChange setea cada prop del {objeto} buyer
   const handleChange = (event) => {
@@ -109,30 +109,19 @@ export default function Cart() {
     }
   };
 
-  //if orderId is empty ther render Orden de compra
+  //if orderId is not empty ther render Orden de compra
   if (orderId !== "") {
     return (
       <>
-        {loading ? (
-          <>
-            <Container>
-              <Row className="d-flex justify-content-center mt-5 pt-5">
-                <Spinner
-                  animation="border"
-                  role="status"
-                  size="lg"
-                  variant="primary"
-                ></Spinner>
-              </Row>
-            </Container>
-          </>
-        ) : (
-          <>
-            <h2 className="fs-1 text-center py-5 my-5">
-              Orden de compra: {orderId}
-            </h2>
-          </>
-        )}
+        <h2 className="fs-1 text-center py-5 my-5">
+          Orden de compra: {orderId}
+        </h2>
+      </>
+    );
+  } else if (orderId !== "" && cart.length === 0) {
+    return (
+      <>
+        <h2 className="fs-1 text-center py-5 my-5">Cargando guacho</h2>
       </>
     );
   }

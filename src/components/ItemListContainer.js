@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
+
 import { Container, Row, Spinner } from "react-bootstrap";
+import { useParams } from "react-router-dom";
+
 import { getItems } from "../api/api";
 import ItemList from "./ItemList";
-import { useParams } from "react-router-dom";
 
 export default function ItemListContainer({ greeting }) {
   const { categoryName } = useParams();
@@ -10,12 +12,11 @@ export default function ItemListContainer({ greeting }) {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  //aca se resuelve la promesa y se guarda el array de productos en products
+  //promise resolve storing product array in products
   useEffect(() => {
     getItems()
       .then(function (products) {
-        // Seteo products con un filter que compara la categoria en products.category a exactamente igual que el nombre de la categoria que definimos en nuestra api y con el parametro que le pasamos en el componente padre
-        // Uso un ternary operator if categoryName es null (cuando estamos en el home) nos setea en el state del hook todos los productos ELSE nos filtra por categoria
+        //if there's no categoryName then setProducts array, else filter products by category and setProducts filtered
         !categoryName
           ? setProducts(products)
           : setProducts(
@@ -25,7 +26,7 @@ export default function ItemListContainer({ greeting }) {
             );
       })
       .finally(() => setLoading(false));
-  }, [categoryName]); //con las dependencias vacias la funcion se ejecuta una vez cargado el componente y listo
+  }, [categoryName]);
 
   if (!loading) {
     return (
@@ -48,7 +49,7 @@ export default function ItemListContainer({ greeting }) {
     return (
       <>
         <Container>
-          <Row className="d-flex justify-content-center mt-5">
+          <Row className="d-flex justify-content-center">
             <Spinner
               animation="border"
               role="status"

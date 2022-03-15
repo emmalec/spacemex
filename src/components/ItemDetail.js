@@ -1,8 +1,10 @@
 import React, { useContext, useState } from "react";
+
 import { Card, Col, Button } from "react-bootstrap";
-import ItemCount from "./ItemCount";
 import { Link } from "react-router-dom";
+
 import { CartContext } from "../context/CartContext";
+import ItemCount from "./ItemCount";
 
 export default function ItemDetail({ item }) {
   const [showButton, setShowButton] = useState(false);

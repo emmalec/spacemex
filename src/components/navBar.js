@@ -1,9 +1,14 @@
 import React from "react";
-import { Navbar, Nav, Container } from "react-bootstrap"; //import de los componentes necesarios de bootstrap
-import logo from "../../src/spacemexLogo.png"; //import de el logo para usarlo en img
-import "../components/NavBar.css"; // import de mi css
-import CartWidget from "./CartWidget";
+//React-router import
 import { Link } from "react-router-dom";
+//React-bootstrap components import
+import { Navbar, Nav, Container } from "react-bootstrap";
+//font-awsome import
+import CartWidget from "./CartWidget";
+//logo import
+import logo from "../../src/spacemexLogo.png";
+//custom CSS import
+import "../components/NavBar.css";
 
 function NavBar() {
   return (
