@@ -19,7 +19,7 @@ export default function CartForm({
             name="name"
             value={buyer.name}
             onChange={handleChange}
-            onInput={buyer.name ? validateForm : undefined}
+            onBlur={validateForm}
             //Set class if formErrors.name exists / set invalid if true / if name length is > 1 set valid
             className={
               formErrors.name
@@ -41,7 +41,7 @@ export default function CartForm({
             name="surname"
             value={buyer.surname}
             onChange={handleChange}
-            onInput={buyer.surname ? validateForm : undefined}
+            onBlur={validateForm}
             className={
               formErrors.surname
                 ? "is-invalid"
@@ -62,7 +62,7 @@ export default function CartForm({
             name="phone"
             value={buyer.phone}
             onChange={handleChange}
-            onInput={buyer.phone ? validateForm : undefined}
+            onBlur={(e) => validateForm(e.currentTarget)}
             className={
               formErrors.phone
                 ? "is-invalid"
@@ -83,7 +83,7 @@ export default function CartForm({
             name="email"
             value={buyer.email}
             onChange={handleChange}
-            onInput={buyer.email ? validateForm : undefined}
+            onBlur={validateForm}
             className={formErrors.email && "is-invalid"}
           />
           {formErrors.email && (
@@ -100,9 +100,7 @@ export default function CartForm({
             name="emailValid"
             value={buyer.emailValid}
             onChange={handleChange}
-            onInput={
-              buyer.email === buyer.emailValid ? validateForm : undefined
-            }
+            onBlur={validateForm}
             className={
               buyer.email === buyer.emailValid ? "is-valid" : "is-invalid"
             }

@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { getItems } from "../api/api";
 import ItemDetail from "./ItemDetail";
-import { Container, Row } from "react-bootstrap";
+import { Container, Row, Spinner } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase";
 
 export default function ItemDetailContainer() {
+  const [loading, setLoading] = useState(true);
   const [productsDetail, setProductsDetail] = useState([]);
   // itemId lo defino en App.js - los nombres deben coincidir
   // El tipo de dato que nos devuelve el parametro es un string, hay que transformarlo en number de ser necesario
@@ -29,14 +30,35 @@ export default function ItemDetailContainer() {
       })
       .catch((error) => {
         console.log(error);
-      });
+      })
+      .finally(() => setLoading(false));
   }, [itemId]);
 
-  return (
-    <Container>
-      <Row>
-        <ItemDetail key={productsDetail.id} item={productsDetail} />
-      </Row>
-    </Container>
-  );
+  {
+    if (loading) {
+      return (
+        <>
+          <Container>
+            <Row className="d-flex justify-content-center mt-5 pt-5">
+              <Spinner
+                animation="border"
+                role="status"
+                size="lg"
+                variant="primary"
+              ></Spinner>
+            </Row>
+          </Container>
+        </>
+      );
+    }
+    return (
+      <>
+        <Container>
+          <Row>
+            <ItemDetail key={productsDetail.id} item={productsDetail} />
+          </Row>
+        </Container>
+      </>
+    );
+  }
 }

@@ -45,6 +45,19 @@ export default function ItemListContainer({ greeting }) {
       </>
     );
   } else {
-    return <Spinner></Spinner>;
+    return (
+      <>
+        <Container>
+          <Row className="d-flex justify-content-center mt-5">
+            <Spinner
+              animation="border"
+              role="status"
+              size="lg"
+              variant="primary"
+            ></Spinner>
+          </Row>
+        </Container>
+      </>
+    );
   }
 }

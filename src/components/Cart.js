@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { CartContext } from "../context/CartContext";
-import { Button, Col, Container, Form, Row } from "react-bootstrap";
+import { Button, Col, Container, Form, Row, Spinner } from "react-bootstrap";
 import CartDetail from "./CartDetail";
 import { Link } from "react-router-dom";
 import { hasPointerEvents } from "@testing-library/user-event/dist/utils";
@@ -26,7 +26,9 @@ export default function Cart() {
   //useState de error de formulario, setea un objeto
   const [formErrors, setFormErrors] = useState({});
   //button disabled CartForm
-  const [buttonDisabled, setButtonDisabled] = useState(false);
+  const [buttonDisabled, setButtonDisabled] = useState(true);
+  //loading
+  const [loading, setLoading] = useState(true);
 
   //La funcion handleChange setea cada prop del {objeto} buyer
   const handleChange = (event) => {
@@ -75,6 +77,7 @@ export default function Cart() {
       setButtonDisabled(false);
       return true;
     } else {
+      setButtonDisabled(true);
       return false;
     }
   };
@@ -83,6 +86,7 @@ export default function Cart() {
     //prevent default para el refresh
     e.preventDefault();
     if (validateForm(buyer)) {
+      setLoading(true);
       //creamos la order
       const newOrder = {
         date: new Date(),
@@ -99,7 +103,7 @@ export default function Cart() {
         .catch((error) => {
           console.log(error);
         })
-        .finally(deleteCart());
+        .finally(setLoading(false), deleteCart());
     } else {
       console.log("Error en el form");
     }
@@ -108,15 +112,38 @@ export default function Cart() {
   //if orderId is empty ther render Orden de compra
   if (orderId !== "") {
     return (
-      <h2 className="fs-1 text-center py-5 my-5">Orden de compra: {orderId}</h2>
+      <>
+        {loading ? (
+          <>
+            <Container>
+              <Row className="d-flex justify-content-center mt-5 pt-5">
+                <Spinner
+                  animation="border"
+                  role="status"
+                  size="lg"
+                  variant="primary"
+                ></Spinner>
+              </Row>
+            </Container>
+          </>
+        ) : (
+          <>
+            <h2 className="fs-1 text-center py-5 my-5">
+              Orden de compra: {orderId}
+            </h2>
+          </>
+        )}
+      </>
     );
   }
   //if cart lenght is equal to 0 then render Carrito vacio
   else if (cart.length === 0) {
     return (
-      <h2 className="fs-1 text-center py-5 my-5">
-        El carrito está vacio! Ir a <Link to="/">Home</Link>
-      </h2>
+      <>
+        <h2 className="fs-1 text-center py-5 my-5">
+          El carrito está vacio! Ir a <Link to="/">Home</Link>
+        </h2>
+      </>
     );
   }
   // else render the cart
