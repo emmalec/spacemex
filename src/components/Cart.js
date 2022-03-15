@@ -21,13 +21,10 @@ export default function Cart() {
     email: "",
     emailValid: "",
   });
-
   //useState de la order
   const [orderId, setOrderId] = useState("");
-
   //useState de error de formulario, setea un objeto
   const [formErrors, setFormErrors] = useState({});
-
   //button disabled CartForm
   const [buttonDisabled, setButtonDisabled] = useState(false);
 
@@ -93,7 +90,6 @@ export default function Cart() {
         items: cart,
         total: sumCartPrice(),
       };
-
       //creamos el ticket en firebase collection
       addDoc(collection(db, "ticket"), newOrder)
         .then((res) => {
