@@ -1,5 +1,7 @@
 import React from "react";
 
+import { Link } from "react-router-dom";
+
 import { Card, Button, Container, Col, Row } from "react-bootstrap";
 
 import "../components/CartOrder.css";
@@ -20,7 +22,11 @@ export default function CartOrder({ orderId }) {
                   <Card.Text className="fs-4 pb-3">
                     Tu orden de compra es: {orderId}
                   </Card.Text>
-                  <Button variant="primary">Volver a home</Button>
+                  <Link to="/">
+                    <Button variant="primary" className="btn-lg">
+                      Volver a home
+                    </Button>
+                  </Link>
                 </Card.Body>
               </Card>
             </Col>
