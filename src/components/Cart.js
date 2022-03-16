@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { CartContext } from "../context/CartContext";
-import { Button, Col, Container, Form, Row, Spinner } from "react-bootstrap";
+import { Button, Col, Container, Row } from "react-bootstrap";
 import CartDetail from "./CartDetail";
 import { Link } from "react-router-dom";
 import { hasPointerEvents } from "@testing-library/user-event/dist/utils";
@@ -9,11 +9,11 @@ import { db } from "../firebase";
 import CartForm from "./CartForm";
 import Loading from "./Loading";
 import CartOrder from "./CartOrder";
+import CartTotal from "./CartTotal";
 
 export default function Cart() {
   //Traemos el cart y las functions del context
-  const { cart, sumCartPrice, sumCartQty, deleteCart } =
-    useContext(CartContext);
+  const { cart, sumCartPrice, deleteCart } = useContext(CartContext);
 
   //Creamos el useState con el objeto buyer para setearlo mas adelante en el handleChange
   const [buyer, setBuyer] = useState({
@@ -133,37 +133,21 @@ export default function Cart() {
       <>
         <Container fluid>
           <Row>
-            <Col md={8}>
-              {cart.length > 0 ? (
-                cart.map((item) => <CartDetail key={item.id} item={item} />)
-              ) : (
-                <h2 className="fs-1 text-center py-5 my-5">
-                  El carrito está vacio! Ir a <Link to="/">Home</Link>
-                </h2>
-              )}
-              {/* La function sumCart() returns sumCart = 0 
-          estando vacio el cart, if sumCart > 0 then renderiza el h2 */}
-              {sumCartPrice() > 0 && (
-                <div className="border rounded d-flex justify-content-end py-4 mt-4">
-                  <div className="pe-5">
-                    <p className="text-muted my-0">
-                      Hay {sumCartQty()} producto/s en tu carrito.
-                    </p>
-                    <h2>
-                      <span className="text-muted">Total: </span>
-                      {sumCartPrice()} ARS
-                    </h2>
-                    <Button onClick={deleteCart} variant="danger">
-                      Vaciar carrito
-                    </Button>
-                    <Link to="/">
-                      <Button variant="primary" className="ms-2">
-                        Seguir comprando
-                      </Button>
-                    </Link>
-                  </div>
-                </div>
-              )}
+            <Col md={8} className="mb-5">
+              {
+                //Cart items
+                cart.length > 0 ? (
+                  cart.map((item) => <CartDetail key={item.id} item={item} />)
+                ) : (
+                  <h2 className="fs-1 text-center py-5 my-5">
+                    El carrito está vacio! Ir a <Link to="/">Home</Link>
+                  </h2>
+                )
+              }
+              {
+                //Cart total
+                cart.length > 0 && <CartTotal />
+              }
             </Col>
 
             <Col md={4}>

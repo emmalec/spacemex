@@ -7,7 +7,7 @@ export default function CartDetail({ item }) {
 
   return (
     <>
-      <Card bg="light" className="d-flex flex-row py-4 ps-4 pe-3 mt-4">
+      <Card bg="light" className="d-flex flex-row py-4 ps-4 pe-3 mt-3">
         <Col md={3}>
           <Card.Img src={item.pictureUrl} />
         </Col>
@@ -16,7 +16,9 @@ export default function CartDetail({ item }) {
             <Card.Title className="fs-2">{item.title}</Card.Title>
             <Card.Text className="fs-6 text-wrap text-secondary">
               <p className="my-0">Cantidad: {item.quantity}</p>
-              <p className="my-0">Precio: {item.price}</p>
+              <p className="my-0">Precio por unidad: {item.price}</p>
+              <hr className="my-1"></hr>
+              <p className="my-0">Precio total: {item.price * item.quantity}</p>
             </Card.Text>
           </Card.Body>
         </Col>

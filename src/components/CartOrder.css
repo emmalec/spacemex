@@ -1,0 +1,10 @@
+.myBackground {
+  height: 100vh;
+  background-size: contain;
+  background-position: center;
+  background-image: url(../../public/img/spaceBag.jpg);
+}
+
+.cardOpacity {
+  background-color: rgba(245, 245, 245, 0.8);
+}
