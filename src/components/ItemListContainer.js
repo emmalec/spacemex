@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 
 import { getItems } from "../api/api";
 import ItemList from "./ItemList";
+import Loading from "./Loading";
 
 export default function ItemListContainer({ greeting }) {
   const { categoryName } = useParams();
@@ -46,19 +47,6 @@ export default function ItemListContainer({ greeting }) {
       </>
     );
   } else {
-    return (
-      <>
-        <Container>
-          <Row className="d-flex justify-content-center">
-            <Spinner
-              animation="border"
-              role="status"
-              size="lg"
-              variant="primary"
-            ></Spinner>
-          </Row>
-        </Container>
-      </>
-    );
+    return <Loading message="Cargando productos" />;
   }
 }

@@ -6,6 +6,7 @@ import { doc, getDoc } from "firebase/firestore";
 
 import { db } from "../firebase";
 import ItemDetail from "./ItemDetail";
+import Loading from "./Loading";
 
 export default function ItemDetailContainer() {
   const [loading, setLoading] = useState(true);
@@ -38,20 +39,7 @@ export default function ItemDetailContainer() {
 
   {
     if (loading) {
-      return (
-        <>
-          <Container>
-            <Row className="d-flex justify-content-center mt-5 pt-5">
-              <Spinner
-                animation="border"
-                role="status"
-                size="lg"
-                variant="primary"
-              ></Spinner>
-            </Row>
-          </Container>
-        </>
-      );
+      return <Loading message="Cargando detalle" />;
     }
     return (
       <>

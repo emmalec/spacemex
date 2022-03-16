@@ -7,6 +7,8 @@ import { hasPointerEvents } from "@testing-library/user-event/dist/utils";
 import { addDoc, collection } from "firebase/firestore";
 import { db } from "../firebase";
 import CartForm from "./CartForm";
+import Loading from "./Loading";
+import CartOrder from "./CartOrder";
 
 export default function Cart() {
   //Traemos el cart y las functions del context
@@ -28,7 +30,7 @@ export default function Cart() {
   //button disabled CartForm
   const [buttonDisabled, setButtonDisabled] = useState(true);
   //loading
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(undefined);
 
   //La funcion handleChange setea cada prop del {objeto} buyer
   const handleChange = (event) => {
@@ -103,7 +105,7 @@ export default function Cart() {
         .catch((error) => {
           console.log(error);
         })
-        .finally(setLoading(false), deleteCart());
+        .finally(() => setLoading(false), deleteCart());
     } else {
       console.log("Error en el form");
     }
@@ -111,19 +113,9 @@ export default function Cart() {
 
   //if orderId is not empty ther render Orden de compra
   if (orderId !== "") {
-    return (
-      <>
-        <h2 className="fs-1 text-center py-5 my-5">
-          Orden de compra: {orderId}
-        </h2>
-      </>
-    );
-  } else if (orderId !== "" && cart.length === 0) {
-    return (
-      <>
-        <h2 className="fs-1 text-center py-5 my-5">Cargando guacho</h2>
-      </>
-    );
+    return <CartOrder orderId={orderId} />;
+  } else if (loading === true) {
+    return <Loading message="Estamos preparando tu orden" />;
   }
   //if cart lenght is equal to 0 then render Carrito vacio
   else if (cart.length === 0) {
