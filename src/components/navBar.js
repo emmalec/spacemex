@@ -7,7 +7,7 @@ import { Navbar, Nav, Container } from "react-bootstrap";
 import CartWidget from "./CartWidget";
 //logo import
 import logo from "../../src/spacemexLogo.png";
-//custom CSS import
+//custom CSS import/
 import "../components/NavBar.css";
 
 function NavBar() {
