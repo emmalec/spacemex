@@ -12,6 +12,6 @@ Esta dependencia nos permite trabajar con icons para poder importarlos en nuestr
 
 Esta dependencia es importante para agregar estilo a nuestra web app, la libreria de bootstrap es util a la hora de realizar proyectos de facil mantenimiento y componentes reutilizables.
 
-###App flow
+### App flow
 
 ![VideoGif](public/appFlow.gif)
