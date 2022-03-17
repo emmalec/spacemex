@@ -15,7 +15,7 @@ import CartTotal from "./CartTotal";
 export default function Cart() {
   const { cart, sumCartPrice, deleteCart } = useContext(CartContext);
 
-  //Creamos el useState con el objeto buyer para setearlo mas adelante en el handleChange
+  //Creamos el useState con el objeto buyer para setearlo mas adelante en el handleChange/
   const [buyer, setBuyer] = useState({
     name: "",
     surname: "",
