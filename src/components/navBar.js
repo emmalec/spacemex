@@ -28,8 +28,8 @@ function NavBar() {
             <Nav.Link as={Link} to="/category/merchandise">
               Merchandise
             </Nav.Link>
-            <Nav.Link as={Link} to="/cart">
-              <CartWidget></CartWidget>
+            <Nav.Link as={Link} to="/cart" activeClassName="active">
+              <CartWidget />
             </Nav.Link>
           </Nav>
         </Container>

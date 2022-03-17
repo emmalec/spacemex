@@ -15,12 +15,13 @@ export default function CartOrder({ orderId }) {
             <Col md={6}>
               <Card className="text-center round cardOpacity">
                 <Card.Body className="">
-                  <Card.Title className="fs-1 pb-3">
-                    Gracias por tu compra
+                  <Card.Title className="fs-1 pb-3 text-secondary">
+                    ¡Gracias por tu compra!
                   </Card.Title>
                   <hr></hr>
                   <Card.Text className="fs-4 pb-3">
-                    Tu orden de compra es: {orderId}
+                    Tu numero de orden es:{" "}
+                    <span className="orderNum">{orderId}</span>
                   </Card.Text>
                   <Link to="/">
                     <Button variant="primary" className="btn-lg">

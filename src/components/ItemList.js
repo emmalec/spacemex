@@ -1,5 +1,6 @@
-import Item from "./Item";
 import { CardGroup, Row } from "react-bootstrap";
+
+import Item from "./Item";
 import "../components/ItemList.css";
 
 export default function ItemList({ products }) {

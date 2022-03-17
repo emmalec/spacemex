@@ -1,18 +1,18 @@
 import React, { useContext, useState } from "react";
-import { CartContext } from "../context/CartContext";
-import { Button, Col, Container, Row } from "react-bootstrap";
-import CartDetail from "./CartDetail";
+
+import { Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { hasPointerEvents } from "@testing-library/user-event/dist/utils";
 import { addDoc, collection } from "firebase/firestore";
+
+import { CartContext } from "../context/CartContext";
 import { db } from "../firebase";
+import CartDetail from "./CartDetail";
 import CartForm from "./CartForm";
 import Loading from "./Loading";
 import CartOrder from "./CartOrder";
 import CartTotal from "./CartTotal";
 
 export default function Cart() {
-  //Traemos el cart y las functions del context
   const { cart, sumCartPrice, deleteCart } = useContext(CartContext);
 
   //Creamos el useState con el objeto buyer para setearlo mas adelante en el handleChange
@@ -151,7 +151,7 @@ export default function Cart() {
             </Col>
 
             <Col md={4}>
-              <Container className="py-4 mt-4 border rounded bg-light">
+              <Container className="py-4 mt-3 border rounded bg-light">
                 <h2 className="mb-4">
                   Completa el formulario para finalizar la compra
                 </h2>

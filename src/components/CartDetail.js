@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
-import { CartContext } from "../context/CartContext";
+
 import { Card, Col, Button } from "react-bootstrap";
+
+import { CartContext } from "../context/CartContext";
 
 export default function CartDetail({ item }) {
   const { removeItem } = useContext(CartContext);
